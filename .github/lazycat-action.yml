@@ -1,0 +1,42 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/filecodebox.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: filecodebox
+
+images:
+  - id: filecodebox
+    target: service
+    service: file-code-box
+    source: docker.io/lanol/filecodebox
+    channel: stable
+    sort: semver
+    # Strict three-part release tags only; excludes the two-part 2.8/2.7
+    # aliases, the edge-* builds, master and latest.
+    tag_regex: ^[0-9]+[.][0-9]+[.][0-9]+$
+    delivery:
+      mode: mirror
+      image_template: "docker.1ms.run/lanol/filecodebox:{tag}"
+      require_digest_match: true
+
+stores:
+  official:
+    enabled: false
+    skip_if_version_exists: false
+    retry:
+      enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: FileCodeBox 文件快递柜
+    summary: 镜像加速模式自动跟上游 Docker Hub 版本发布的匿名口令文件分享工具

@@ -1,0 +1,40 @@
+application:
+  subdomain: filecodebox
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://file-code-box:12345/
+  injects:
+    # The first visit runs a setup wizard for the admin password, and the
+    # admin panel needs the same credentials afterwards.
+    - id: login-autofill
+      when:
+        - /setup
+        - /admin
+        - /admin/login
+      do:
+        - src: builtin://simple-inject-password
+          params:
+            user: admin
+            password: "{{ .U.admin_password }}"
+    # Uploading files uses native file pickers, which the store requires to
+    # route through the LazyCat cloud drive.
+    - id: open-save-chooser
+      on: browser
+      when:
+        - /*
+      do:
+        - src: file:///lzcapp/pkg/content/lazycat-injects/lzc-file-chooser-inject.js
+
+services:
+  file-code-box:
+    # lanol/filecodebox:2.8.4
+    image: docker.1ms.run/lanol/filecodebox:2.8.4
+    environment:
+      - APP_ENV=production
+      - LOG_LEVEL=warning
+      - ACCESS_LOG=false
+      - WORKERS=1
+    binds:
+      - /lzcapp/var/data:/app/data
