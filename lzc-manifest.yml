@@ -26,10 +26,10 @@ application:
         - /*
       do:
         - src: file:///lzcapp/pkg/content/lazycat-injects/lzc-file-chooser-inject.js
-
 services:
   file-code-box:
     # lanol/filecodebox:2.8.4
+    # upstream: docker.io/lanol/filecodebox:2.8.4
     image: docker.1ms.run/lanol/filecodebox:2.8.4
     environment:
       - APP_ENV=production
