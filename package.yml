@@ -1,6 +1,6 @@
 package: community.lazycat.app.filecodebox
 version: 2.8.4
-name: FileCodeBox 文件快递柜
+name: 文件快递柜
 description: 轻量自托管文件分享工具，匿名口令取件，像取快递一样取文件
 min_os_version: 1.5.0
 homepage: https://github.com/vastsa/filecodebox
@@ -8,10 +8,10 @@ author: vastsa
 license: LGPL-3.0
 locales:
   zh:
-    name: FileCodeBox 文件快递柜
+    name: 文件快递柜
     description: 轻量自托管文件分享工具，匿名口令取件，像取快递一样取文件
   zh_CN:
-    name: FileCodeBox 文件快递柜
+    name: 文件快递柜
     description: 轻量自托管文件分享工具，匿名口令取件，像取快递一样取文件
   en:
     name: FileCodeBox
