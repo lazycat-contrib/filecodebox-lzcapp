@@ -29,8 +29,8 @@ application:
 services:
   file-code-box:
     # lanol/filecodebox:2.8.4
-    # upstream: docker.io/lanol/filecodebox:2.8.4
-    image: docker.1ms.run/lanol/filecodebox:2.8.4
+    # upstream: docker.io/lanol/filecodebox:2.8.5
+    image: docker.1ms.run/lanol/filecodebox:2.8.5
     environment:
       - APP_ENV=production
       - LOG_LEVEL=warning
